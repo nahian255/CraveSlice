@@ -16,13 +16,15 @@ export default function RootLayout({ children }) {
         <div className='max-w-6xl  mx-auto'>
           {/* Nav bar */}
           <nav className='flex py-5 bg-red-1'>
-            <div className='flex gap-4'>
+            <div className='flex gap-4 items-center'>
               <Link className='text-4xl font-semibold px-4 text-[#f13a01]' href={'/'}>Crave Slice</Link>
-              <div className='text-2xl text-slate-700 flex justify-evenly gap-6'>
+              <div className='text-xl text-slate-600 font-serif flex justify-evenly gap-6'>
                 <Link href={'/'}>Home</Link>
                 <Link href={'/'}>Menu</Link>
                 <Link href={'/'}>About</Link>
                 <Link href={'/'}>Contact</Link>
+                <Link href={'/'}> <button className="bg-[#f13a01] w-28  text-xl font-semibold text-white rounded-3xl">Login </button></Link>
+                <Link href={'/register'}> <button className="bg-[#f13a01] w-28  text-xl font-semibold text-white rounded-3xl">Register</button></Link>
               </div>
             </div>
             {/* <div className='text-end'>
@@ -30,6 +32,11 @@ export default function RootLayout({ children }) {
             </div> */}
           </nav>
           {children}
+          {/* footer */}
+          <div className="py-12 ">
+            <hr />
+            <h3 className="text-center pt-8 text-gray-500"> 2024 all right reserve</h3>
+          </div>
         </div>
       </body>
     </html>
