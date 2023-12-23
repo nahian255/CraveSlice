@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
                 <Link href={'/'}>Menu</Link>
                 <Link href={'/'}>About</Link>
                 <Link href={'/'}>Contact</Link>
-                <Link href={'/'}> <button className="bg-[#f13a01] w-28  text-xl font-semibold text-white rounded-3xl">Login </button></Link>
+                <Link href={'/login'}> <button className="bg-[#f13a01] w-28  text-xl font-semibold text-white rounded-3xl">Login </button></Link>
                 <Link href={'/register'}> <button className="bg-[#f13a01] w-28  text-xl font-semibold text-white rounded-3xl">Register</button></Link>
               </div>
             </div>
