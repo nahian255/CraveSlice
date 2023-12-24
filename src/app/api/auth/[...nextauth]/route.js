@@ -1,43 +1,48 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import { connectMongoDB } from "@/lib/mongodb";
+import User from "@/models/user";
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 
-const handler = NextAuth({
+export const authOptions = {
     providers: [
         CredentialsProvider({
-            // The name to display on the sign in form (e.g. 'Sign in with...')
-            name: 'Credentials',
-            // The credentials is used to generate a suitable form on the sign in page.
-            // You can specify whatever fields you are expecting to be submitted.
-            // e.g. domain, username, password, 2FA token, etc.
-            // You can pass any HTML attribute to the <input> tag through the object.
-            credentials: {
-                username: { label: "email", type: "email", placeholder: "email" },
-                password: { label: "Password", type: "password" }
-            },
-            async authorize(credentials, req) {
-                // You need to provide your own logic here that takes the credentials
-                // submitted and returns either a object representing a user or value
-                // that is false/null if the credentials are invalid.
-                // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-                // You can also use the `req` object to obtain additional parameters
-                // (i.e., the request IP address)
-                const res = await fetch("/your/endpoint", {
-                    method: 'POST',
-                    body: JSON.stringify(credentials),
-                    headers: { "Content-Type": "application/json" }
-                })
-                const user = await res.json()
+            name: "credentials",
+            credentials: {},
 
-                // If no error and we have user data, return it
-                if (res.ok && user) {
-                    return user
+            async authorize(credentials) {
+                const { email, password } = credentials;
+
+                try {
+                    await connectMongoDB();
+                    const user = await User.findOne({ email });
+
+                    if (!user) {
+                        return null;
+                    }
+
+                    const passwordsMatch = await bcrypt.compare(password, user.password);
+
+                    if (!passwordsMatch) {
+                        return null;
+                    }
+
+                    return user;
+                } catch (error) {
+                    console.log("Error: ", error);
                 }
-                // Return null if user data could not be retrieved
-                return null
-            }
-        })
-    ]
+            },
+        }),
+    ],
+    session: {
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: "/",
+    },
+};
 
-})
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };

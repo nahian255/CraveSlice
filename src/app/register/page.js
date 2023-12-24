@@ -15,24 +15,46 @@ const register = () => {
             setError("All fields are necessary.");
             return;
         }
-        const res = await fetch("api/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-            }),
-        });
 
-        if (res.ok) {
-            const form = e.target;
-            form.reset();
-        } else {
-            console.log('user failed');
+        try {
+
+            const resUserExists = await fetch("api/userExiste", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            const { user } = await resUserExists.json();
+
+            if (user) {
+                setError("User already exists.");
+                return;
+            }
+            const res = await fetch("api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                }),
+            });
+
+            if (res.ok) {
+                const form = e.target;
+                form.reset();
+            } else {
+                console.log('user failed');
+            }
+
+        } catch (error) {
+            console.log('error during registion', error);
         }
+
     }
 
     return (
