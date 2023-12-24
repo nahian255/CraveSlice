@@ -1,9 +1,15 @@
-import { User } from "../../models/user"
-import mongoose from "mongoose"
+import { NextResponse } from "next/server";
+
 
 export async function POST(req) {
-    const body = await req.json();
-    mongoose.connect(process.env.Mongo_url)
-    const createdUser = await User.create(body)
-    return Response.json(createdUser)
+
+    try {
+        const cokhenarma = await req.json();
+        console.log(cokhenarma);
+        return NextResponse.json({ message: 'user reqistered' })
+    } catch (error) {
+        return NextResponse.json(
+            { message: 'an error ' }
+        )
+    }
 }

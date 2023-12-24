@@ -8,30 +8,37 @@ const register = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState("");
 
-    // console.log('re', email, password);
-
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' },
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            // Handle successful response, if needed
-        } catch (error) {
-            // Handle error, e.g., log or display an error message
-            console.error('Error during registration:', error);
+
+        if (!name || !email || !password) {
+            setError("All fields are necessary.");
+            return;
+        }
+        const res = await fetch("api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+            }),
+        });
+
+        if (res.ok) {
+            const form = e.target;
+            form.reset();
+        } else {
+            console.log('user failed');
         }
     }
 
     return (
 
         <div className="grid place-items-center h-screen">
-            <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
+            <div className="shadow-lg p-5 rounded-lg border-t-4 border-[#f13a01]">
                 <h1 className="text-xl font-bold my-4">Register</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -50,7 +57,7 @@ const register = () => {
                         type="password"
                         placeholder="Password"
                     />
-                    <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
+                    <button type='submit' className="bg-[#f13a01] text-white font-bold cursor-pointer px-6 py-2">
                         Register
                     </button>
 
