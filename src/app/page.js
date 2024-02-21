@@ -46,6 +46,7 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum fugiat suscipit molestias incidunt tempora voluptates dolore eos hic, porro inventore iusto enim ea, nobis doloribus excepturi distinctio culpa. Officiis, aperiam!</p>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium odit aspernatur velit molestias, omnis harum! Provident totam molestias sed neque quisquam voluptatum sint quas quae vel maxime. Quo, blanditiis mollitia.</p>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium odit aspernatur velit molestias, omnis harum! Provident totam molestias sed neque quisquam voluptatum sint quas quae vel maxime. Quo, blanditiis mollitia.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium odit aspernatur velit molestias, omnis harum! Provident totam molestias sed neque quisquam voluptatum sint quas quae vel maxime. Quo, blanditiis mollitia.</p>
         </div>
         <Title title={'Contact us'} subTitle={'Don\'t hesitate'}></Title>
         <div className="mt-3 text-center pb-4">

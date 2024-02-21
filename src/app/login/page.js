@@ -15,22 +15,22 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // try {
-        //     const res = await signIn("credentials", {
-        //         email,
-        //         password,
-        //         redirect: false,
-        //     });
+        try {
+            const res = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
 
-        //     if (res.error) {
-        //         setError("Invalid Credentials");
-        //         return;
-        //     }
+            if (res.error) {
+                setError("Invalid Credentials");
+                return;
+            }
 
-        //     router.replace("dashboard");
-        // } catch (error) {
-        //     console.log(error);
-        // }
+            router.replace("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
