@@ -6,6 +6,10 @@ import pizzaImg from '../../public/pizza.png'
 import Menu from "../component/Menu";
 import Title from "../component/extra/Title";
 
+export const metadata = {
+  title: 'Home || CraveSlice',
+  description: 'This is Home page',
+}
 export default function Home() {
   return (
     <main className="min-h-screen ">
