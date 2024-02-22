@@ -4,7 +4,7 @@ import React from 'react';
 const Navbar = () => {
     return (
         <div>
-            <nav className=' flex justify-between   py-5 '>
+            <nav className=' flex justify-between py-5 '>
                 <div>
                     <Link className='text-4xl font-semibold px-4 text-[#f13a01]' href={'/'}>Crave Slice</Link>
                 </div>
