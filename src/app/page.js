@@ -12,6 +12,7 @@ export const metadata = {
 }
 export default function Home() {
   return (
+    // this is the main root page in my side || Home page 
     <main className="min-h-screen ">
       <section className="flex">
         <div className=" w-1/2 py-8">
